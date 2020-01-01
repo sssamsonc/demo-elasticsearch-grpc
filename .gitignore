@@ -1,0 +1,6 @@
+.idea/
+.vscode/
+.DS_Store
+output/
+php_grpc_docker/supervisord.log
+php_grpc_docker/supervisord.pid

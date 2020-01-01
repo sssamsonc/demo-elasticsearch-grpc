@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+//import "google/protobuf/any.proto";
+
+option go_package = "go-server/esapi";
+
+package esapi;
+
+service EsApi {
+  rpc Search(SearchRequest) returns (PageDTO) {}
+
+  rpc Upsert(News) returns (CommonResponse) {}
+
+  rpc Delete(NewsId) returns (CommonResponse) {}
+
+  rpc Test(Empty) returns (CommonResponse) {}
+}
+
+message Empty {
+}
+
+message SearchRequest {
+  repeated string exclude_category_ids = 1;
+  string keyword = 2;
+  int32 current = 3;
+  int32 size = 4;
+}
+
+message PageDTO {
+  int32 current = 1;
+  int32 size = 2;
+  int32 total = 3;
+  int32 pages = 4;
+//  google.protobuf.Any records = 5;
+  repeated News records = 5;
+}
+
+message News {
+  string category_id = 1;
+  string digest = 2;
+  string id = 3;
+  int64 publish_time = 4;
+  repeated string tags = 5;
+  string title = 6;
+  int64 update_time = 7;
+}
+
+message CommonResponse {
+  bool is_success = 1;
+}
+
+message NewsId {
+  string id = 1;
+}
